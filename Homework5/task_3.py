@@ -19,7 +19,29 @@
 
 
 def everything_for_your_cat(cats_data):
-    # Здесь нужно написать код
+    new_cats_data = {}
+
+    # Словарь {Кличка+возвраст: Фамилия+Имя}, пример {'Мартин, 5': 'Алексей Егоров', 'Фродо, 3': 'Анна Самохина'}
+    for tpl in cats_data:
+        cat = f"{tpl[0]}, {tpl[1]}"
+        owner = f"{tpl[2]} {tpl[3]}"
+        new_cats_data[cat] = owner
+
+    # Уникальный список владельцев
+    owner_list = []
+    for owner in new_cats_data.values():
+        if owner not in owner_list:
+            owner_list.append(owner)
+
+    # Результирующая строка
+    our_str = ''
+    for owner in owner_list:
+        cats_list = []
+        for cat in new_cats_data.keys():
+            if new_cats_data[cat] == owner:
+                cats_list.append(cat)
+        our_str += f"{owner}: {'; '.join(cats_list)}\n"
+
     return our_str
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ

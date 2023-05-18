@@ -7,7 +7,13 @@
 
 
 def repeats(our_str):
-    # Здесь нужно написать код
+    repeats_char = dict.fromkeys([char for char in our_str], 0)  # словарь с частотой повторений символа, изначально 0
+    new_str = ''
+
+    for char in our_str:
+        repeats_char[char] = repeats_char.get(char) + 1  # при повторении символа увеличим значение ключа на 1
+        new_str += f"{char}_{repeats_char.get(char)}"
+
     return new_str
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
