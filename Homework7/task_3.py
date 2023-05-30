@@ -23,7 +23,72 @@
 #   3. ЗАЩИЩЕННЫЙ (protected) атрибут fare - Стоимость проезда
 # У класса должно быть СВОЙСТВО how_long, которое вычисляет время прохождения маршрута по формуле max_speed/(4*path)
 
-# Здесь пишем код
+class PublicTransport:
+    """Базовый класс общественный транспорт"""
+    def __init__(self, brand, engine_power, year, color, max_speed):
+        """Экземпляр класса создается из следующих атрибутов:
+        1. brand - Марка транспорта
+        2. ЗАЩИЩЕННЫЙ (protected) атрибут engine_power - Мощность двигателя
+        3. year - Год выпуска
+        4. color - Цвет
+        5. max_speed - Максимальная скорость
+        """
+        self.brand = brand
+        self._engine_power = engine_power
+        self.year = year
+        self.color = color
+        self.max_speed = max_speed
+
+    @property
+    def info(self):
+        """свойоство выводит на печать информацию о: марке, цвете, годе выпуска и мощности двигателя"""
+        return f"{self.brand}, {self.color}, {self.year}, {self._engine_power}"
+
+
+class Bus(PublicTransport):
+    """Класс автобусов унаследованный от PublicTransport"""
+    def __init__(self, brand, engine_power, year, color, max_speed, passengers, park, fare):
+        """Дополнительными атрибутами будут:
+        1. passengers - кол-во пассажиров
+        2. ПРИВАТНЫЙ (private) атрибут park - Парк приписки автобуса
+        3. ЗАЩИЩЕННЫЙ (protected) атрибут fare - Стоимость проезда
+        """
+        super().__init__(brand, engine_power, year, color, max_speed)
+        self.passengers = passengers
+        self.__park = park
+        self._fare = fare
+
+    @property
+    def park(self):
+        """Возвращает значение приватного атрибута park"""
+        return self.__park
+
+    @park.setter
+    def park(self, park):
+        """при присвоении проверяется номер парка, что он в диапазоне от 1000 до 9999"""
+        if (park >= 1000) and (park <= 9999):
+            self.__park = park
+        else:
+            raise AssertionError('Проверка на ограничение диапазона НЕ пройдена')
+
+
+class Tram(PublicTransport):
+    """Класс трамваев унаследованный от PublicTransport"""
+    def __init__(self, brand, engine_power, year, color, max_speed, route, path, fare):
+        """Дополнительными атрибутами будут:
+        1. ПРИВАТНЫЙ (private) атрибут route - маршрут трамвая
+        2. path - длина маршрута
+        3. ЗАЩИЩЕННЫЙ (protected) атрибут fare - Стоимость проезда
+        """
+        super().__init__(brand, engine_power, year, color, max_speed)
+        self.__route = route
+        self.path = path
+        self._fare = fare
+
+    @property
+    def how_long(self):
+        """Вычисляет время прохождения маршрута по формуле max_speed/(4*path)"""
+        return self.max_speed / (4 * self.path)
 
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ

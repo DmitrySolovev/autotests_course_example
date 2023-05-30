@@ -9,7 +9,28 @@
 # Segment((-2, -3), (4, 5)).x_axis_intersection() --> True
 # Segment((-2, -3), (-4, -5)).y_axis_intersection() --> False
 
-# Здесь пишем код
+import math
+
+
+class Segment:
+    """Отрезок с координатами точек (x1, y1), (x2, y2)"""
+    def __init__(self, coord_point1, coord_point2):
+        self.x1 = coord_point1[0]
+        self.x2 = coord_point2[0]
+        self.y1 = coord_point1[1]
+        self.y2 = coord_point2[1]
+
+    def length(self):
+        """возвращает длину нашего отрезка, с округлением до 2 знаков после запятой"""
+        return round(math.sqrt(math.pow(self.x2 - self.x1, 2) + math.pow(self.y2 - self.y1, 2)), 2)
+
+    def x_axis_intersection(self):
+        """возвращает True, если отрезок пересекает ось абцисс, иначе False"""
+        return True if (self.y1 * self.y2 < 0) else False
+
+    def y_axis_intersection(self):
+        """возвращает True, если отрезок пересекает ось ординат, иначе False"""
+        return True if (self.x1 * self.x2 < 0) else False
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 
