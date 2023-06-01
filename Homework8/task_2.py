@@ -39,6 +39,10 @@ class Trigon:
         if (args[0] + args[1] <= args[2]) or (args[1] + args[2] <= args[0]) or (args[2] + args[0] <= args[1]):
             raise Exception("Не треугольник")
 
+        self.side_a = args[0]
+        self.side_b = args[1]
+        self.side_c = args[2]
+
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 
 
