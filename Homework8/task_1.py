@@ -24,7 +24,9 @@ def treatment_sum(our_tuple):
     if len(our_tuple) > 2:
         raise Exception('Много данных')
 
-    if len(our_tuple) < 2:
+    try:
+        our_tuple[0], our_tuple[1]
+    except IndexError:
         return 'Недостаточно данных'
 
     try:
